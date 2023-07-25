@@ -1,0 +1,46 @@
+.morning {
+    color: green;
+}
+
+.afternoon {
+    color: orange;
+}
+
+.night {
+    color: blue;
+}
+
+
+/* Estilos para pantallas más grandes (por ejemplo, escritorio) */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .navbar-collapse {
+    display: flex;
+  }
+  
+  /* Estilos para pantallas más pequeñas (por ejemplo, dispositivos móviles) */
+  @media (max-width: 767px) {
+    .navbar {
+      flex-direction: column;
+    }
+  
+    .navbar-collapse {
+      display: none;
+    }
+  
+    .navbar-toggler {
+      display: block;
+    }
+  
+    .navbar-toggler.active + .navbar-collapse {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+ 
+#colorwhite{
+  color: whitesmoke;
+}

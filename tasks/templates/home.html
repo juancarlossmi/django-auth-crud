@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<main class="container py-5">
+    <section class="card card-body bg-dark">
+        <h1 class="display-1 text-center">Django App</h1>
+        <p>This Django application was created on July 24, 2023, by Juan Carlos Salazar Mendoza. Its main purpose is to allow registered users to perform CRUD (Create, Read, Update, Delete) operations tasks. Users must first sign in to access the application, and they can later log out. Once registered and login, users have the ability to create new tasks, view existing tasks, edit them, save changes, and delete tasks. Additionally, they can mark tasks as important. The web project was developed using a combination of technologies, including HTML, CSS, Python, JavaScript, and Bootstrap. To host the application, used render.com. For data storage, the application uses PostgreSQL as its database, where tasks, user information, and session details are stored securely.</p>
+    </section>
+    {% if request.user.is_authenticated %}
+        <div class="m-3 alert alert-success" role="alert">
+            <h5 class="text-center {{css_class}}">
+                {{greeting}}
+            </h5>
+        </div>        
+    {% else %}
+        <div class="text-center">
+            <a class="btn btn-secondary" href="/signin/">
+                Signin
+            </a>
+            <a class="btn btn-dark" href="/signup/">
+                Signup
+            </a>
+        </div>
+    {% endif %}
+</main>
+{% endblock %}

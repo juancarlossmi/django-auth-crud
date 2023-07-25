@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<main class="continer">
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+            <h1 id="whiteh1">{{task.title}}</h1>
+            {{error}}
+            <form method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button class="btn btn-primary">
+                    Update
+                </button>
+            </form>
+            <div class="mt-5 d-flex">
+                <!-- los formularios nos ayudan a cargar el html enviadno la informacion a la base de datos son muy utiles junto con un button -->
+                <!-- Este form agrega el valor de la feecha actual al al campo date_complete de Task-->
+                <form action="{% url 'complete_task' task.id %}" method="POST">
+                    {% csrf_token %}
+                    <button  class="btn btn-secondary">
+                        Complete
+                    </button>
+                </form>
+                <!-- Este form elimina las tareas creadas por el usuaario logeado -->
+                <form action="{% url 'delete_task' task.id %}" method="POST">
+                    {% csrf_token %}
+                    <button  class="btn btn-danger">
+                        Delete
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<main class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h1 class="text-center display-3 py-5" style="color: white;">Tasks Pending</h1>
+            <!-- por cada recorrido echo dentro de la base de datos de TASKS muestra lo siguientes atributos en forma de lista -->
+            <ul class="list-group">
+            {% for task in tasks %}
+                <li class="list-group-item m-2">
+                    <!-- agregar la etiqueta a con un href nos ayudara a obtener el id de una tarea de forma dinamica  -->
+                    <a class="link-offset-2 link-underline link-underline-opacity-0" href="{% url 'task_detail' task.id %}">
+                        <header class="d-flex justify-content-between">
+                            {% if task.important %}
+                                <h1 class="fw-bold text-success">{{task.title}}</h1>
+                            {% else %}
+                                <h1 class="fw-bold">{{task.title}}</h1>
+                            {% endif %}
+                            <p>{{task.user.username}}</p>
+                        </header>
+                        <p>{{task.description}}</p>
+                        <!-- |date:'M j Y H:i'}} = formato que muestra la fecha en tipo "mmm" "aaa" mostrar el mes en formato "mmm" = M, dia = j, Y = año H= hora :i = minutos  -->
+                        <p>{{task.date_completed|date:'M j Y H:i'}}</p>
+                    </a>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+</main>
+{% endblock %}

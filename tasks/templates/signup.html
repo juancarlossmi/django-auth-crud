@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- cuando se ejecuta el evento click del boton "SIGNUP" django buscara un ruta llamada "/signup/" y ahi almacenara la informacion del formulario -->
+<main class="container">
+    <div class="row">
+        <div class="col-md-4 offset-md-4 mt-5">
+            <form method="POST" class="card card-body text-center bg-dark">
+                <h1 class="text-center">Signup</h1>
+                {{error}}
+                {% csrf_token %}
+                <!-- La propiedad "AS_P" permite acomodar los elementos del formulario en etiquetas <p> -->
+                <!-- Form crea un formulario por defecto -->
+                <!-- {{form}} -->
+                <!-- podemos crear forms personalizados que esten realcionados con el class form de Task -->
+                <div class="mb-3">
+                    <label for="username">Username</label>
+                    <input type="text" name = "username" id = "username" class="form-control" placeholder="write your username">
+                </div>
+                
+                <div class="mb-3">
+                    <label for="password1">Password</label>
+                    <input type="password" name = "password1" id = "password1" class="form-control" placeholder="write your password">
+                </div>
+
+                <div class="mb-3">
+                    <label for="password2">Confirm your password</label>
+                    <input type="password" name = "password2" id = "password2" class="form-control" placeholder="Confirm your password">
+                </div>
+
+                <button class="btn btn-primary">
+                    Signup
+                </button>
+            </form>
+        </div>
+    </div>
+</main>
+{% endblock %}

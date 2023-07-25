@@ -1,0 +1,29 @@
+<!-- este html es una copia exacta de tasks.html y lo utilizamos para distribuir la informacion que muestra task_complete y task_pending -->
+{% extends "base.html" %}
+{% block content %}
+<main class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h1 class="text-center display-3 py-5">Tasks Completed</h1>
+            <ul class="list-group">
+            {% for task in tasks %}
+                <li class="list-group-item m-2">
+                    <a class="link-offset-2 link-underline link-underline-opacity-0" href="{% url 'task_detail' task.id %}">
+                        <header class="d-flex justify-content-between">
+                            {% if task.important %}
+                                <h1 class="fw-bold text-success">{{task.title}}</h1>
+                            {% else %}
+                                <h1 class="fw-bold">{{task.title}}</h1>
+                            {% endif %}
+                            <p>{{task.user.username}}</p>
+                        </header>
+                        <p>{{task.description}}</p>                    
+                        <p>{{task.date_completed|date:'M j Y H:i'}}</p>
+                    </a>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+</main>
+{% endblock %}

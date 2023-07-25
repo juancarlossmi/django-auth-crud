@@ -1,0 +1,70 @@
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Django Crud application</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Dentro del head del archivo HTML -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+
+    
+
+    
+</head>
+<body class="bg-dark" id="colorwhite">
+    <!-- el archivo base.html nos ayuda a crear barras de navegacion -->
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark w-100">
+        <div class="container">
+            <a class="navbar-brand" href="/">Django App</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    </li>
+                    <!-- cuando nos autenticamos django por defecto crea un objeto global an donde 
+                        podemos acceder desde cualquier plantilla llamado "USER"
+                        en este ejemplo: 
+                            "si user esta autenticado entonces muestra el codigo que hay debajo y en cado de no estarlo entonces muestra signup"
+                    -->
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'tasks' %}">Tasks</a>
+                    </li>
+                    <li class="nav-item">
+                        <!-- la propiedad "URL" nos permite llamar a las vistas que renderizen el html que contienen -->
+                        <a class="nav-link active" aria-current="page" href="{% url 'tasks_completed' %}">Tasks Completed</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'create_task' %}">Create Task</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'signout' %}">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'signup' %}">Signup</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'signin' %}">Signin</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- block_content = importar porciones de otro html -->
+    {% block content %}
+    <!-- endblock = termina las importaciones del html -->
+    {% endblock %}
+<!-- Justo antes del cierre del body del archivo HTML -->
+<script src="{% static 'js/script.js' %}"></script>
+
+</body>
+
+</html>
